@@ -76,3 +76,8 @@ Not configured, though.
 4. Configure nginx hosts using provided template config (or write your own).
 
 5. All done.
+
+### Using PHPStrom + Vagrant + Xdebug
+
+## In a browser
+1.
