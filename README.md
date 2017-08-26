@@ -77,7 +77,21 @@ Not configured, though.
 
 5. All done.
 
-### Using PHPStrom + Vagrant + Xdebug
+## Using PHPStrom + Vagrant + Xdebug
 
-## In a browser
-1.
+### In a browser
+1. The the xdebug config ```/etc/php/7.1/mods-available/xdebug.ini``` should contain the following lines 
+```
+zend_extension=xdebug.so
+xdebug.remote_enable=1
+xdebug.remote_host=10.4.4.1
+xdebug.remote_connect_back=true
+xdebug.idekey=PHPSTORM
+xdebug.overload_var_dump=off
+```
+2. Configure server in the PHPStrom ```Preferences -> languages & Frameworks -> PHP -> Servers```, with the ```use path mapping``` option enabled. [This](https://www.theodo.fr/blog/2016/08/configure-xdebug-phpstorm-vagrant/) may help.
+3. Add debug configuration in ```Run -> Edit Configurations```
+4. Install and configure xdebug helper extension for web browser
+
+### cli
+
