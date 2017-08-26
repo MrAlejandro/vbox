@@ -1,4 +1,6 @@
-# pepyakabox #
+Forked from https://bitbucket.org/torunar/pepyakabox
+
+# vbox #
 
 Vagrant box for amateur PHP development.
 
@@ -36,7 +38,7 @@ Available modules:
 * sqlite3
 * mcrypt
 * intl
-* soap 
+* soap
 * imagick
 * xdebug
 
