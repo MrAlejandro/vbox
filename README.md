@@ -93,5 +93,36 @@ xdebug.overload_var_dump=off
 3. Add debug configuration in ```Run -> Edit Configurations```
 4. Install and configure xdebug helper extension for web browser
 
-### cli
+### cli [Original](https://gist.github.com/Im0rtality/9710254)
 
+# In host:
+
+1. Go to PHPStorm `Settings > Project settings > PHP > Servers`
+2. Add server with following parameters:
+    - Name: `vagrant` (same as `serverName=` in `debug` script)
+    - Host, port: set vagrant box IP and port
+    - Debugger: Xdebug
+    - [v] Use path mappings
+    - Map your project root in host to relative dir in guest
+    - Hit OK
+3. PHPStorm > Run > Start listen for PHP Debug connections
+4. Put a breakpoint
+
+# In guest:
+
+1. Find where your Xdebug config is stored. Run `$ php -i | grep ini` and look for `*xdebug.ini` or `*custom.ini` - depends on configuration (mine was in `/etc/php5/cli/conf.d/zzzz_custom.ini`)
+2. Add following `xdebug.remote_host = 11.22.33.1`, when box ip is `11.22.33.*`
+3. Create file `/usr/bin/debug` with contents added below (file `debug` below)
+4. Make it executable `$ sudo chmod 0777 /usr/bin/debug`
+5. Run your script prefixed with `debug`:
+    - `$ debug php index.php cache:clear`
+6. Debugger window should open in IDE
+
+# Script
+```
+#!/bin/sh
+env PHP_IDE_CONFIG="serverName=vagrant" XDEBUG_CONFIG="idekey=PHPSTORM" $@
+
+# for Symfony apps use following
+# env PHP_IDE_CONFIG="serverName=vagrant" XDEBUG_CONFIG="idekey=PHPSTORM" SYMFONY_DEBUG="1" $@
+```
